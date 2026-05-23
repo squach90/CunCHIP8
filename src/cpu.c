@@ -43,7 +43,7 @@ void chip8_init(Chip8 *chip) {
 int chip8_load_program(Chip8 *chip, const char *filename) {
     FILE *file = fopen(filename, "rb");
     if (!file) {
-        fprintf(stderr, "❌ Connot open file %s\n", filename);
+        fprintf(stderr, "❌ Cannot open file %s\n", filename);
         return 1;
     }
 
@@ -91,7 +91,7 @@ void chip8_emulation_cycle(Chip8 *chip) {
                     if (chip->sp > 0) {
                         chip->sp--;
                         chip->pc = chip->stack[chip->sp];
-                        // Note: No pc += 2 here because we saved the address 
+                        // Note: No pc += 2 here because we saved the address
                         // of the *next* instruction during the CALL.
                     } else {
                         fprintf(stderr, "Stack underflow at PC: 0x%03X\n", chip->pc);
