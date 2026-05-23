@@ -12,7 +12,7 @@ struct State {
 } state;
 
 void createWindow() {
-    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
         SDL_Log("Erreur SDL_Init: %s", SDL_GetError());
         return;
     }

@@ -5,12 +5,12 @@
 #include "../includes/display.h"
 #include "../includes/controller.h"
 #include "../includes/file_browser.h"
+#include "../includes/audio.h"
 
 int debug = 0;
 int nosync = 0;
 
 int main(int argc, char **argv) {
-
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--nosync") == 0)
@@ -36,6 +36,7 @@ int main(int argc, char **argv) {
 
     createWindow();
     controller_init();
+    audio_init();
     printf("🚀 Emulation started.\n");
 
     const int cycles_per_frame = 10; // opcode per frame
@@ -51,6 +52,7 @@ int main(int argc, char **argv) {
         }
 
         chip8_update_timers(&chip);
+        audio_update(chip.sound_timer);
         draw_screen(&chip);
 
         if (!nosync) {
@@ -62,6 +64,7 @@ int main(int argc, char **argv) {
         }
     }
 
+    audio_cleanup();
     destroyWindow();
     return 0;
 }
